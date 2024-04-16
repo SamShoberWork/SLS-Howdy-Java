@@ -85,9 +85,9 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: SRM Upload
       if: ${{ github.event_name != 'pull_request' }}
-      uses: codedx/codedx-github-action@v1.2
+      uses: 'codedx/codedx-github-action@v1.2'
       with:
-        server-url: ${{ vars.SRM_URL }}/codedx
+        server-url: ${{ vars.SRM_URL }}/srm
         api-key: ${{ secrets.SRM_APIKEY }}
         project-name: ${{ github.event.repository.name }}
         # project-id: "4;branch=${{ github.ref_name }}"   # ER CDX-1693 support project-name
