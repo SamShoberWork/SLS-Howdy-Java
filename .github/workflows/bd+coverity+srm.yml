@@ -5,7 +5,7 @@
 # https://github.com/marketplace/actions/code-dx-analysis
 #
 #
-#  ENVIRONMENT VARIABLES AND sECRETS 
+#  ENVIRONMENT VARIABLES AND SECRETS 
 # vars.BLACKDUCK_URL
 # secrets.BLACKDUCK_API_TOKEN
 # vars.COVERITY_URL
