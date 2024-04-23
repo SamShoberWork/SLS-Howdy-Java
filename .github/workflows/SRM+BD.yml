@@ -89,13 +89,14 @@ jobs:
       with:
         server-url: ${{ vars.SRM_URL }}/srm
         api-key: ${{ secrets.SRM_APIKEY }}
+        # ER CDX-1693 support project-name
         project-name: ${{ github.event.repository.name }}
-        # project-id: "4;branch=${{ github.ref_name }}"   # ER CDX-1693 support project-name
-        base-branch-name: main    #this may not be right. commenting it out for now
-        #changed target branch from  ${{ github.ref_name }}  to ${{ github.base_ref }}  
-        target-branch-name: ${{ github.base_ref }}              # ER CDX-1666 support branch-name
+        # project-id: "4;branch=${{ github.ref_name }}"   
+        # ER CDX-1666 support branch-name
+        base-branch-name: ${{ github.event.repository.name }} 
+        target-branch-name: ${{ github.ref_name }}        
         source-and-binaries-glob: './**'
-        wait-for-completion: false
+        wait-for-completion: true
 #    - name: Save Logs
 #      if: always()
 #      uses: actions/upload-artifact@v4
