@@ -84,7 +84,7 @@ jobs:
         coverity_prComment_enabled: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: SRM Upload
-      # if: ${{ github.event_name != 'pull_request' }}
+      if: ${{ github.event_name != 'pull_request' }}   # we should not have PR's being added to SRM
       uses: 'codedx/codedx-github-action@v1.2.0'
       with:
         server-url: ${{ vars.SRM_URL }}/srm
