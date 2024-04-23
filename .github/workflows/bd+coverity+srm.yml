@@ -93,7 +93,7 @@ jobs:
         # project-id: "4;branch=${{ github.ref_name }}"   # ER CDX-1693 support project-name
         # target-branch-name: ${{ github.ref_name }}              # ER CDX-1666 support branch-name
         base-branch-name: ${{ github.ref_name }}    
-        # target-branch-name: ${{ github.ref_name }}     #this may not be right. commenting it out for now            
+        target-branch-name: ${{ github.ref }}     #this may not be right. commenting it out for now            
         source-and-binaries-glob: './**'
         wait-for-completion: false
 #    - name: Save Logs
