@@ -13,8 +13,9 @@
 # secrets.COVERITY_PASSPHRASE
 # vars.SRM_URL
 # secrets.SRM_APIKEY
+# secrets.GITHUB_TOKEN  #  Confirm GITHUB_TOKEN has workflow read & write permissions (GitHub → Project → Settings → Actions → General → Workflow Permissions)
 # 
-# change to force github action #2
+# change to force github action #6
 #
 name: bd+coverity+srm
 on:
