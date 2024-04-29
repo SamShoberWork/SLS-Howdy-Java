@@ -24,7 +24,7 @@ on:
   push:
     # branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
   pull_request:
-    branches: [ main, 1-SamShoberWork-patch ]
+    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
   workflow_dispatch:
 jobs:
   synopsys:
@@ -57,6 +57,7 @@ jobs:
         blackduck_fixpr_enabled: true
         blackduck_reports_sarif_create: true
         blackduck_upload_sarif_report: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Black Duck PR Scan
       if: ${{ github.event_name == 'pull_request' }}
       uses: synopsys-sig/synopsys-action@v1.9.0
