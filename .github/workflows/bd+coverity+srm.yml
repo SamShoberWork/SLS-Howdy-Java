@@ -22,9 +22,9 @@
 name: bd+coverity+srm
 on:
   push:
-    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
+    branches: [ 6-Production, main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
   pull_request:
-    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
+    branches: [ 6-Production, main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
   workflow_dispatch:
 jobs:
   synopsys:
