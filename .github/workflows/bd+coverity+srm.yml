@@ -1,7 +1,7 @@
 # example workflow for standalone Black Duck, Coverity and SRM (Code DX) using GitHub Actions
 # - Black Duck and Coverity full scans on push to specified branches with upload to SRM
 # - Black Duck RAPID and Coverity Comparison scans on pull requests with PR comments enabled
-# 
+#  2024-04-30 - updated full scns modules to use   if: ${{ github.event_name == 'push' }}  instead of triggering on any non-PR event
 #
 # https://github.com/marketplace/actions/synopsys-action
 # https://github.com/marketplace/actions/code-dx-analysis
@@ -17,14 +17,14 @@
 # secrets.SRM_APIKEY
 # secrets.GITHUB_TOKEN  #  Confirm GITHUB_TOKEN has workflow read & write permissions (GitHub → Project → Settings → Actions → General → Workflow Permissions)
 # 
-# change to force github action PR for 1-samshober-patch 2024-04-24 A
+# change to force github action PR for 1-samshober-patch 2024-04-30-A
 #
 name: bd+coverity+srm
 on:
   push:
-    # branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
+    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
   pull_request:
-    branches: [ main, 1-SamShoberWork-patch ]
+    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
   workflow_dispatch:
 jobs:
   synopsys:
@@ -40,8 +40,11 @@ jobs:
         cache: maven
     - name: Maven Build
       run: mvn -B -DskipTests package
+    - name: clean git
+      run: rm -r .git/config
     - name: Black Duck Full Scan
-      if: ${{ github.event_name != 'pull_request' }}
+      if: ${{ github.event_name == 'push' }}
+      # if: ${{ github.event_name != 'pull_request' }}
       uses: synopsys-sig/synopsys-action@v1.9.0
       env:
         DETECT_PROJECT_NAME: ${{ github.event.repository.name }}
@@ -52,6 +55,10 @@ jobs:
         blackduck_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
         blackduck_scan_full: true
         blackduck_scan_failure_severities: 'BLOCKER'
+        # blackduck_fixpr_enabled: true
+        # blackduck_reports_sarif_create: true
+        # blackduck_upload_sarif_report: true
+        # github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Black Duck PR Scan
       if: ${{ github.event_name == 'pull_request' }}
       uses: synopsys-sig/synopsys-action@v1.9.0
@@ -64,9 +71,13 @@ jobs:
         blackduck_token: ${{ secrets.BLACKDUCK_API_TOKEN }}
         blackduck_scan_full: false
         blackduck_prComment_enabled: true
+        # blackduck_fixpr_enabled: true
+        blackduck_reports_sarif_create: true
+        blackduck_upload_sarif_report: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Coverity Full Scan
-      if: ${{ github.event_name != 'pull_request' }}
+      if: ${{ github.event_name == 'push' }}
+      # if: ${{ github.event_name != 'pull_request' }}
       uses: synopsys-sig/synopsys-action@v1.9.0
       with:
         coverity_url: ${{ vars.COVERITY_URL }}
@@ -87,7 +98,8 @@ jobs:
         coverity_prComment_enabled: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: SRM Upload
-      if: ${{ github.event_name != 'pull_request' }}
+      if: ${{ github.event_name == 'push' }}
+      # if: ${{ github.event_name != 'pull_request' }}
       uses: 'codedx/codedx-github-action@v1.2.0'
       with:
         server-url: ${{ vars.SRM_URL }}/srm
