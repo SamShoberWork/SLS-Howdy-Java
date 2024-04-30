@@ -17,14 +17,14 @@
 # secrets.SRM_APIKEY
 # secrets.GITHUB_TOKEN  #  Confirm GITHUB_TOKEN has workflow read & write permissions (GitHub → Project → Settings → Actions → General → Workflow Permissions)
 # 
-# change to force github action PR for 1-samshober-patch 2024-04-30-A
+# change to force github action PR for 1-samshober-patch 2024-04-30-B
 #
 name: bd+coverity+srm
 on:
   push:
-    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
+    branches: [ 6-Production, main, 1-SamShoberWork-PersonalBranch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch ]
   pull_request:
-    branches: [ main, 1-SamShoberWork-patch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
+    branches: [ 6-Production, main, 1-SamShoberWork-PersonalBranch, 2-Feature-Branch, 3-Dev, 4-Testing, 5-Release-Branch  ]
   workflow_dispatch:
 jobs:
   synopsys:
