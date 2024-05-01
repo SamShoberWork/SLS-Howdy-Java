@@ -17,7 +17,7 @@
 # secrets.SRM_APIKEY
 # secrets.GITHUB_TOKEN  #  Confirm GITHUB_TOKEN has workflow read & write permissions (GitHub → Project → Settings → Actions → General → Workflow Permissions)
 # 
-# change to force github action PR for 1-samshober-patch 2024-04-30-B
+# change to force github action for 1-SamShoberWork - 2024-05-01 
 #
 name: bd+coverity+srm
 on:
