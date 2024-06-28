@@ -60,6 +60,7 @@ jobs:
         blackduck_fixpr_enabled: true
         blackduck_reports_sarif_create: true
         blackduck_upload_sarif_report: true
+        detect_accuracy_required: NONE 
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Black Duck PR Scan
       if: ${{ github.event_name == 'pull_request' }}
