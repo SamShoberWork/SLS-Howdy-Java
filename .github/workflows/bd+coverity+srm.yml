@@ -19,7 +19,7 @@
 #
 # reversed order of maven build and clean git. not sure why, just seems like clean git should happen before the build
 # 
-# change to force github action for 1-SamShoberWork - 2024-05-01    7:03 pm
+# change to force github action for 1-SamShoberWork - 2024-07-30 3:20 PM 
 #
 name: bd+coverity+srm
 on:
